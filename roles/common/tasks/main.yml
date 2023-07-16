@@ -1,0 +1,4 @@
+- name: Обновление всех программ
+  yum:
+    name: '*'
+    state: latest

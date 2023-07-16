@@ -1,0 +1,20 @@
+- name: Развертывание на серверах из inventory.ini
+  hosts: my_servers
+  become: true
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.9
+    new_user: Grigo5
+    ssh_port: 10022
+
+  roles:
+    - common
+    - user_management
+    - software_installation
+    - ssh_configuration
+
+  handlers:
+    - name: Restart SSH service
+      service:
+        name: sshd
+        state: restarted

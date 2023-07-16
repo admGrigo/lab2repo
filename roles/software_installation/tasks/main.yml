@@ -1,0 +1,9 @@
+- name: Установка пакетов mc, htop, atop, ncdu
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - mc
+    - htop
+    - atop
+    - ncdu

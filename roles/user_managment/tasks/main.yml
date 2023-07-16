@@ -1,0 +1,12 @@
+- name: Добавление нового пользователя
+  user:
+    name: "{{ new_user }}"
+    state: present
+    password: "Test12345"
+
+- name: Добавление прав sudo
+  become_user: root
+  lineinfile:
+    path: /etc/sudoers
+    line: "{{ new_user }} ALL=(ALL) NOPASSWD: ALL"
+    validate: visudo -cf %s

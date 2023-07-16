@@ -1,0 +1,15 @@
+- name: Смена порта SSH
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^Port '
+    line: "Port {{ ssh_port }}"
+  notify:
+    - Restart SSH service
+
+- name: Отключение доступа по паролю
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication '
+    line: "PasswordAuthentication no"
+  notify:
+    - Restart SSH service
