@@ -5,7 +5,7 @@
 
   vars:
     ansible_python_interpreter: /usr/bin/python3.9
-    new_user: Grigo4
+    new_user: Grigo5
     ssh_port: 10022
 
   tasks:
