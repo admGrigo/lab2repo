@@ -1,0 +1,67 @@
+---
+- name: Развертывание на серверах из inventory.ini
+  hosts: my_servers
+  become: true
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3.9
+    new_user: Grigo4
+    ssh_port: 10022
+
+  tasks:
+    
+    - name: Обновление всех программ
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Добавление нового пользователя
+      user:
+        name: "{{ new_user }}"
+        state: present
+        password: "Test12345"
+        
+    - name: Добавление прав sudo
+      become_user: root
+      lineinfile:
+        path: /etc/sudoers
+        line: "{{ new_user }} ALL=(ALL) NOPASSWD: ALL"
+        validate: visudo -cf %s
+
+    - name: Создание нового SSH ключа для нового пользователя
+      user:
+        name: "{{ new_user }}"
+        generate_ssh_key: yes
+        ssh_key_type: ed25519
+
+    - name: Установка пакетов mc, htop, atop, ncdu
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mc
+        - htop
+        - atop
+        - ncdu
+        
+    - name: Смена порта SSH
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Port '
+        line: "Port {{ ssh_port }}"
+      notify:
+        - Restart SSH service
+
+    - name: Отключение доступа по паролю
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication '
+        line: "PasswordAuthentication no"
+      notify:
+        - Restart SSH service
+
+  handlers:
+    - name: Restart SSH service
+      service:
+        name: sshd
+        state: restarted
