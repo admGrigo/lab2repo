@@ -1,5 +1,2 @@
 - name: Publish web page
-  template:
-    src: index.html
-    dest: /usr/share/nginx/html/index.html
   notify: Reload Nginx
