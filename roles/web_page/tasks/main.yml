@@ -1,0 +1,5 @@
+- name: Publish web page
+  copy:
+    src: index.html
+    dest: /usr/share/nginx/html/index.html
+  notify: Reload Nginx
