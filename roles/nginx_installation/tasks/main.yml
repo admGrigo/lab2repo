@@ -20,7 +20,10 @@
   copy:
     content: |
       <html>
-      <head><title>Курс системное администрирование</title></head>
+      <head>
+      <meta charset="UTF-8">
+      <title>Курс системное администрирование</title>
+      </head>
       <body>
       <h1>Практическое задание</h1>
       </body>

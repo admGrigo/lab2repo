@@ -1,2 +1,0 @@
-- name: Publish web page
-  notify: Reload Nginx

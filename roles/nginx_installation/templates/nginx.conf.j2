@@ -20,8 +20,8 @@ http {
     gzip on;
     include /etc/nginx/conf.d/*.conf;
     server {
-        listen 0.0.0.0:80 default_server;
-        server_name;
+        listen 80 default_server;
+        server_name lab2;
         root /usr/share/nginx/html;
         index index.html;
     }

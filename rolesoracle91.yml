@@ -13,7 +13,6 @@
     - software_installation
     - ssh_configuration
     - nginx_installation
-    - web_page
 
   handlers:
     - name: Restart SSH service
