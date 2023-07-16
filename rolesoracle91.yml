@@ -20,3 +20,8 @@
       service:
         name: sshd
         state: restarted
+
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded

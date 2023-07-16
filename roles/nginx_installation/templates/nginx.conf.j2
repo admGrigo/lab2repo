@@ -21,7 +21,7 @@ http {
     include /etc/nginx/conf.d/*.conf;
     server {
         listen 0.0.0.0:80 default_server;
-        server_name _;
+        server_name;
         root /usr/share/nginx/html;
         index index.html;
     }
